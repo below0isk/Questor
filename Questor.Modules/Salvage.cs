@@ -254,20 +254,11 @@ namespace Questor.Modules
                 // Walk through the list of items ordered by highest value item first
                 foreach (var item in items.OrderByDescending(i => i.IskPerM3))
                 {
-                    // We never want to pick up a cap booster
-                    if (item.GroupID == (int) Group.CapacitorGroupCharge)
-                        continue;
-
                     // We pick up loot depending on isk per m3
                     var isMissionItem = Cache.Instance.MissionItems.Contains((item.Name ?? string.Empty).ToLower());
 
                     // Never pick up contraband (unless its the mission item)
                     if (!isMissionItem && item.IsContraband)
-                        continue;
-
-                    // We never want to pick up metal scraps or cap boosters
-                    if (item.TypeId == 30497 || item.TypeId == 15331 || item.TypeId == 263 || item.TypeId == 264 || item.TypeId == 3552 || item.TypeId == 3554 
-                        || item.TypeId == 11283 || item.TypeId == 11285 || item.TypeId == 11287 || item.TypeId == 11289)
                         continue;
 
                     // Do we want to loot other items?
